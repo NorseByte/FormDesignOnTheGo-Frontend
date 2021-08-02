@@ -1,0 +1,48 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--main-container-height);
+    background-color: #E8E8E8;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+}
+
+.container {
+    height: var(--main-container-content-height);
+    max-width: var(--main-page-width);
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    flex: 0 0 auto;
+}
+
+.logo-img {
+    height: var(--main-container-content-height);
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media only screen and (max-width: 1200px) {
+    :root {
+        --main-container-height: 5rem;
+        --main-container-content-height: 3rem;
+    }
+}

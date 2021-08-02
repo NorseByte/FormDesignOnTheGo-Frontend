@@ -1,0 +1,5 @@
+.body {
+    position: relative;
+    top:var(--main-container-height);
+    padding-bottom: var(--footer-container-height);
+}

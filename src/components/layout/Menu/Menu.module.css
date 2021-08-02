@@ -1,0 +1,43 @@
+.links {
+    display: flex;
+    margin-left: 10px;
+    overflow: auto;
+    flex: 0 1 auto;
+}
+
+.links-list {
+    list-style-type: none;
+    margin: 0;
+    height: var(--main-container-content-height);
+    overflow-x: auto;
+    align-items: center;
+    display: flex;
+}
+
+.links-list-li {
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.links-list-span {
+    font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 550;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.links-list-a {
+    color: #000000;
+    text-decoration: none;
+}
+
+.links-list-a:hover {
+    color: #817eaa;
+    text-decoration: none;
+}
+
+.links-list-active {
+    color: #817eaa;
+    text-decoration: none;
+}
