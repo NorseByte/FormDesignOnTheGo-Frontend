@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import Layout from "./components/layout/Layout";
+import {Switch, Route} from "react-router-dom"
+
+/* Import Pages */
+import HomePage from "./components/pages/HomePage";
+import FormPage from "./components/pages/FormPage";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    return (
+        <Layout>
+            <Switch>
+                <Route path="/" exact>
+                    <HomePage />
+                </Route>
+
+                <Route path="/form/:formid">
+                    <FormPage />
+                </Route>
+            </Switch>
+        </Layout>
+    );
 }
 
 export default App;
