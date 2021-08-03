@@ -28,16 +28,16 @@
 }
 
 .links-list-a {
-    color: #000000;
+    color: var(--link-default-color);
     text-decoration: none;
 }
 
 .links-list-a:hover {
-    color: #817eaa;
+    color: var(--link-active-color);
     text-decoration: none;
 }
 
 .links-list-active {
-    color: #817eaa;
+    color: var(--link-active-color);
     text-decoration: none;
 }

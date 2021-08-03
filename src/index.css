@@ -5,6 +5,17 @@
   --main-container-height: 6rem;
   --main-container-content-height: 4rem;
   --main-font: 'Noto Sans JP', sans-serif;
+  --link-active-color: #14213d;
+  --link-default-color: #fca311;
+  --background-color-footer-header: #e5e5e5;
+  --background-color-button: #fca311;
+  --background-color-hover-button: #14213d;
+  --text-color-button-hover: #ffffff;
+  --text-color-button: #14213d;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html {

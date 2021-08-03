@@ -1,0 +1,41 @@
+.menubottom-container {
+    display: flex;
+    height: 100%;
+    flex: 1 0 auto;
+}
+
+.menubottom-icon-button {
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.menubottom-icon-button-container {
+    margin-top: 3px;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.menubottom-icon-button-label {
+    margin-top: 15px;
+    font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.link {
+    color: var(--link-default-color);
+    text-decoration: none;
+}
+
+.link-active {
+    color: var(--link-active-color);
+    text-decoration: none;
+}

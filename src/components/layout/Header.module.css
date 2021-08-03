@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     height: var(--main-container-height);
-    background-color: #E8E8E8;
+    background-color: var(--background-color-footer-header);
     color: white;
     display: flex;
     justify-content: space-between;

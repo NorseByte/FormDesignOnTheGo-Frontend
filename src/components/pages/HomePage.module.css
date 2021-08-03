@@ -1,0 +1,10 @@
+.card-style {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    margin: 0.5rem;
+}
+
+.info-card {
+    padding: 20px;
+}
