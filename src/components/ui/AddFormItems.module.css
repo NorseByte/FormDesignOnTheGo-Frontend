@@ -1,51 +1,20 @@
 .card-style {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     position: relative;
     margin: 0.5rem;
 }
-.nav-bar {
+.nav-container {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    margin: 0.5rem;
     justify-content: space-around;
 }
 
-.info-card {
-    padding: 20px;
-}
-
-.navbar-container {
-    display: flex;
-    margin: 0.5rem;
-}
-
-.button {
-    font: inherit;
-    cursor: pointer;
-    background-color: var(--background-color-button);
-    border: 1px solid var(--background-color-button);
-    color: var(--text-color-button);
-    padding: 0.25rem 2rem;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-.button:hover,
-.button:active {
-    background-color: var(--background-color-hover-button);
-    border-color: var(--background-color-hover-button);
-    color: var(--text-color-button-hover);
-}
-
 @media (max-width: 750px) {
-    .card-style {
+    .nav-container {
         flex-direction: column;
-    }
-
-    .navbar-container {
         display: flex;
-        margin: 0.25rem;
-    }
-
-    .button {
-        width: 100%;
     }
 }

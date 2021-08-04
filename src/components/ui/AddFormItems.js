@@ -2,6 +2,7 @@ import classes from "./AddFormItems.module.css";
 import {Card} from "@material-ui/core";
 import {useSelector, useDispatch} from "react-redux";
 import {formitemsAction} from "../../store/formitems-slice";
+import BumpButton from "./buttons/BumpButton";
 
 const AddFormItems = () => {
     /* Get Items to Add */
@@ -16,7 +17,7 @@ const AddFormItems = () => {
         /* Find highest number first map out all the id.
         * Then sort it high to low then take the number 0 that will be a number if there are any objects.
         * if not it will be undefined or zero */
-        const nextID= addedItems.map(items => items.id).sort((a, b) => b - a)[0];
+        const nextID = addedItems.map(items => items.id).sort((a, b) => b - a)[0];
         const id = nextID + 1;
 
         console.log(nextID);
@@ -30,8 +31,8 @@ const AddFormItems = () => {
         const newItem = {
             id: id.toString() === "NaN" ? 0 : id,
             type: what.name,
-            name: what.label,
-            hint: what.objectHint,
+            title: "",
+            description: "",
             needed: 0,
             options: "",
             rank: addedItems.length + 1,
@@ -44,14 +45,14 @@ const AddFormItems = () => {
 
     /* Mapping Items */
     const mappedItems = addItems.map((items) => (
-        <div className={classes['navbar-container']} key={items.id}>
-            <button className={classes.button} onClick={onClickAddHandler.bind(this, items)}>{items.hint}</button>
-        </div>
+        <BumpButton onClick={onClickAddHandler.bind(this, items)}>{items.hint}</BumpButton>
     ));
 
     return (
-        <Card className={`${classes["card-style"]} ${classes["nav-bar"]}`}>
-            {mappedItems}
+        <Card className={`${classes["card-style"]}`}>
+            <div className={classes["nav-container"]}>
+                {mappedItems}
+            </div>
         </Card>
     );
 }

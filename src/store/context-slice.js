@@ -18,7 +18,7 @@ const contextSlice = createSlice({
                 {id: 3, name: "Share/Save", action: "/share", icon: "save" }, ],
         footer: [ {id: 1, name: "Menu", action: "drawer", icon: "menu"},
                   {id: 2, name: "GitHub", action: "ext|https://github.com/suxsx", icon: "github"},],
-        editItems: [    {id: 1, name: "text", describe: "Add a single line text box to your form", hint: "Add TextField", objectHint: "Description of object", label: "Text Box", validation: "empty"},
+        editItems: [    {id: 1, name: "textfield", describe: "Add a single line text box to your form", hint: "Add Text Field", objectHint: "Description of object", label: "Text Box", validation: "empty"},
                         {id: 2, name: "textarea", describe: "Add a text area to your form", hint: "Add Text Area", objectHint: "Description of object", label: "TextArea Box", validation: "empty"},
                         {id: 3, name: "button", describe: "Add a button to your form", hint: "Add Button", objectHint: "Description of object", label: "Button", validation: "button"},],
     },

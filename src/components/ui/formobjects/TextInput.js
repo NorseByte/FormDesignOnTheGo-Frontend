@@ -31,7 +31,9 @@ const TextInput = (props) => {
     * label: Merkelapp
     * hint: hint for innput
     * override: if true "" is accepted innput. If we return "" we set --OK-- insted.
-    * handler: where to send update data. "" if wrong else real data */
+    * handler: where to send update data. "" if wrong else real data
+    * triggerError: true | null trigger error
+    * value: value of innput given from before */
 
     /* State for handeling innput */
     const [enteredValue, setEnteredValue] = useState("");
@@ -43,18 +45,31 @@ const TextInput = (props) => {
 
     /* On rendering check if innput is valid only if thouch and value is valid
     * !enteredIsValid (false) && enteredThouch (false) = false*/
-    const innputIsInvalid = !enteredIsValid && enteredThouch;
+    const innputIsInvalid =  !enteredIsValid && (props.triggerError || enteredThouch);
+
+    /* Default Values */
+    const localID = `${props.id}-${props.name}`;
 
     /* Update main handler
     * Here is it init and upcomming first time is it set to "" after that the real value
     * Check also if entered value is "" if it is and enteredIsValid set --OK-- */
     const updateValue = enteredIsValid ? enteredValue === "" ? "--OK--" : enteredValue : "";
-    props.handler(props.id, updateValue);
+    props.handler({
+        id: props.id,
+        name: props.name,
+        value: updateValue
+    });
 
     /* Update value on change */
     const InputChangeHandler = (checker, event) => {
         if(checker === true) { setIsDisabled(true) }
         setEnteredValue(event.target.value);
+    }
+
+    /* Change Handler Check Box*/
+    const inputCheckboxChangeHandler = (event)=> {
+        const { checked } = event.target;
+        setEnteredValue( checked ? "1" : "0");
     }
 
     /* Set on thouch true */
@@ -68,14 +83,14 @@ const TextInput = (props) => {
         /* Set classbased in innputIsInvalid */
         const innputClass = innputIsInvalid ? classes['innput-error'] : classes['innput-ok'];
 
-        provider = <input key={props.id} type="text" className={innputClass} name={props.name} id={props.id} placeholder={`${props.name} ${props.options}`} onChange={InputChangeHandler.bind(null, false)} onBlur={InputBlurHandler}/>
+        provider = <input key={localID} type="text" className={innputClass} name={props.name} id={localID} placeholder={`${props.hint} ${props.options}`} value={props.value} onChange={InputChangeHandler.bind(null, false)} onBlur={InputBlurHandler}/>
     }
 
     if(props.type === "textarea") {
         /* Set classbased in innputIsInvalid */
         const innputClass = innputIsInvalid ? classes['textarea-error'] : classes['textarea-ok'];
 
-        provider = <textarea key={props.id} className={innputClass} cols="30" rows="5" placeholder={`${props.name} ${props.options}`} onChange={InputChangeHandler.bind(null, false)} onBlur={InputBlurHandler} />;
+        provider = <textarea key={localID} className={innputClass} cols="30" rows="5" placeholder={`${props.hint} ${props.options}`} value={props.value} onChange={InputChangeHandler.bind(null, false)} onBlur={InputBlurHandler} />;
     }
 
     if (props.type === "select") {
@@ -83,20 +98,29 @@ const TextInput = (props) => {
         const innputClass = innputIsInvalid ? classes['innput-error'] : classes['innput-ok'];
 
         const mappedList = props.options.split("|").map((selecter) => (
-            <option key={`${props.id}_option_${selecter}`} value={selecter}>{selecter}</option>
+            <option key={`${localID}_option_${selecter}`} value={selecter}>{selecter}</option>
         ));
 
-        provider = <select key={props.id} id={props.name} className={innputClass} onChange={InputChangeHandler.bind(null, false)}>{mappedList}</select>;
+        provider = <select key={localID} id={localID} className={innputClass} onChange={InputChangeHandler.bind(null, false)}>{mappedList}</select>;
+    }
+
+    if (props.type === "checkbox_checkonce") {
+        provider = (
+            <Fragment>
+                {!isDisabled && <input key={localID} type={props.type} id={localID} placeholder={props.name} value={props.name} onChange={InputChangeHandler.bind(null, true)} />}
+                {isDisabled && <input key={localID} type={props.type} id={localID} placeholder={props.name} value={props.name} checked={true} disabled />}
+                <label htmlFor={props.name}>{props.hint}</label>
+            </Fragment>
+        );
     }
 
     if (props.type === "checkbox") {
         provider = (
             <Fragment>
-                {!isDisabled && <input key={props.id} type={props.type} id={props.name} placeholder={props.name} value={props.name} onChange={InputChangeHandler.bind(null, true)} />}
-                {isDisabled && <input key={props.id} type={props.type} id={props.name} placeholder={props.name} value={props.name} checked={true} disabled />}
+                <input key={localID} type={props.type} id={localID} placeholder={props.name} value={"props.name"} onChange={inputCheckboxChangeHandler} />
                 <label htmlFor={props.name}>{props.hint}</label>
             </Fragment>
-        );
+        )
     }
 
     return (

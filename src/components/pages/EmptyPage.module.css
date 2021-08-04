@@ -1,0 +1,40 @@
+.container {
+    max-width: 600px;
+    text-align: center;
+    margin: auto;
+    padding: 2rem;
+}
+
+.container h2 {
+    color: rgba(0, 0, 0, 1);
+    font-weight: 500;
+    margin-top: -5px;
+}
+
+.container h3 {
+    color: rgba(0, 0, 0, 0.70);
+    margin-top: -5px;
+    font-weight: 500;
+}
+
+.knapp {
+    background-color: var(--background-color-button);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    color: var(--text-color-button);
+    font-size: 20px;
+    padding: 10px;
+}
+
+.knapp:hover {
+    background-color: var(--background-color-hover-button);
+    color: var(--text-color-button-hover);
+}
+
+.icon {
+    color: rgba(0, 0, 0, 0.20);
+}
