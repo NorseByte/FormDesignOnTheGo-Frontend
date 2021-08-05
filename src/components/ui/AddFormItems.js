@@ -20,7 +20,9 @@ const AddFormItems = () => {
         const nextID = addedItems.map(items => items.id).sort((a, b) => b - a)[0];
         const id = nextID + 1;
 
-        console.log(nextID);
+        /* Next rank same as ID */
+        const nextRank = addedItems.map(items => items.rank).sort((a, b) => b - a)[0];
+        const rank = nextRank + 1;
 
         /* What is Object contain all the data from addItems, addItems have default values
         * id: 1, name: "text", describe: "Add a single line text box to your form", hint: "Add TextField", objectHint: "Description of object", label: "Title" */
@@ -35,23 +37,28 @@ const AddFormItems = () => {
             description: "",
             needed: 0,
             options: "",
-            rank: addedItems.length + 1,
-            validation: what.validation
+            rank: rank.toString() === "NaN" ? 0 : rank,
+            validation: what.validation,
+            error: what.error,
         }
 
         dispatch(formitemsAction.addItem(newItem));
-        console.log(newItem);
     }
 
     /* Mapping Items */
     const mappedItems = addItems.map((items) => (
-        <BumpButton onClick={onClickAddHandler.bind(this, items)}>{items.hint}</BumpButton>
+        <BumpButton key={items.id} onClick={onClickAddHandler.bind(this, items)}>{items.hint}</BumpButton>
     ));
+
+    const onClearAllClick = () => {
+        dispatch(formitemsAction.clearForm());
+    }
 
     return (
         <Card className={`${classes["card-style"]}`}>
             <div className={classes["nav-container"]}>
                 {mappedItems}
+                <BumpButton onClick={onClearAllClick} color="red">Clear All</BumpButton>
             </div>
         </Card>
     );

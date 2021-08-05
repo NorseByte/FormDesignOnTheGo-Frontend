@@ -4,12 +4,20 @@ import {createSlice} from "@reduxjs/toolkit";
 /* Custom slice for sving and managing form items
 * Items will have the following setUp.
 *
-* { id: 1, type: "text", title: "postnummer", description: "Hva er ditt postnummer?", needed: 1, options: "", rank: 1, validation: "number" } */
+* { id: 1, type: "text", title: "postnummer", description: "Hva er ditt postnummer?", needed: 1, options: "", rank: 1, validation: "number", error: "Error Message"} */
 const formitemsSlice = createSlice({
    name: 'formitems',
 
    initialState: {
       formItemsAdded: [],
+      formText: {
+         title: "Awsome Title for Form",
+         titleLeft: "About me:",
+         info:   [{id:1,type:"Address",text:"Washingtown DC 23, 3440 R\u00f8yken",icon:"pos",action:""},
+                  {id:2,type:"Phone",text:"999 99 999","icon":"phone","action":""},
+                  {id:3,type:"Email",text:"post@knoph.cc","icon":"email","action":""},
+                  {id:4,type:"Social:",text:"7678 898 893","icon":"corpo","action":""},],
+      }
    },
 
    reducers: {
@@ -33,7 +41,7 @@ const formitemsSlice = createSlice({
 
       updateItem(state, action) {
          /* Get data */
-         const {id, title, description, needed} = action.payload;
+         const {id, title, description, needed, error} = action.payload;
 
          /* Find Item */
          const existingItem = state.formItemsAdded.find(item => item.id === parseInt(id));
@@ -42,6 +50,7 @@ const formitemsSlice = createSlice({
          existingItem.title = title;
          existingItem.description = description;
          existingItem.needed = needed;
+         existingItem.error = error;
       },
 
       updateTitle(state, action) {
@@ -80,14 +89,62 @@ const formitemsSlice = createSlice({
       removeItem(state, action) {
          /* Getting ID */
          const id = action.payload;
+         let counter = 0;
 
          /* Updating state with filter */
          state.formItemsAdded = state.formItemsAdded.filter((item) => item.id !== id);
+
+         /* Sorting state */
+         state.formItemsAdded = state.formItemsAdded.sort((a, b) => a.rank - b.rank);
+
+         /* Renaming */
+         for(const x in state.formItemsAdded) {
+            state.formItemsAdded[x].rank = counter;
+            counter++;
+         }
       },
 
-      clearForm(state, action) {
+      clearForm(state) {
          state.formItemsAdded = [];
-      }
+         console.log("Form Clear");
+      },
+
+      moveUpRank(state, action) {
+         /* Rank ID to Move */
+         const id = action.payload;
+
+         /* Finding the ID */
+         const itemToMove = state.formItemsAdded.find(item => item.id === id);
+         const swapRank = (itemToMove.rank - 1);
+
+         /* Checking if Rank is not 1 cant move any more up*/
+         if(itemToMove.rank !== 0) {
+            const swapID = state.formItemsAdded.find(item => item.rank === swapRank)
+
+            swapID.rank += 1;
+            itemToMove.rank -= 1;
+         }
+      },
+
+      moveDownRank(state, action) {
+         /* Rank ID to Move */
+         const id = action.payload;
+
+         /* Finding the ID */
+         const itemToMove = state.formItemsAdded.find(item => item.id === id);
+         const swapRank = (itemToMove.rank + 1);
+         const maxRank = (state.formItemsAdded.length - 1);
+
+
+         /* Checking if Rank is not 1 cant move any more up*/
+         if(itemToMove.rank !== maxRank) {
+            const swapID = state.formItemsAdded.find(item => item.rank === swapRank)
+
+            swapID.rank -= 1;
+            itemToMove.rank += 1;
+
+         }
+      },
    }
 });
 

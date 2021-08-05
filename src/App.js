@@ -1,5 +1,5 @@
 import Layout from "./components/layout/Layout";
-import {Switch, Route, useHistory} from "react-router-dom"
+import {Switch, Route, Redirect} from "react-router-dom"
 import {useEffect} from "react";
 
 /* Import Pages */
@@ -18,9 +18,6 @@ function App() {
     /* Init Redux Store */
     const dispatch = useDispatch();
 
-    /* Init History */
-    const history = useHistory();
-
     /* Register big and small screen */
     useEffect(() => {
         const handleResize = () => {
@@ -37,17 +34,9 @@ function App() {
         * change anyway so useEffect only run once. */
     }, [dispatch])
 
-    const handleRoot = () => {
-        history.push("/create");
-    }
-
     return (
         <Layout>
             <Switch>
-                <Route path="/" exact>
-                    {handleRoot}
-                </Route>
-
                 <Route path="/create">
                     <HomePage />
                 </Route>
@@ -64,9 +53,12 @@ function App() {
                     <SharePage />
                 </Route>
 
+                <Redirect from="/" to="/create" exact/>
+
                 <Route path='*'>
                     <NotFoundPage />
                 </Route>
+
             </Switch>
         </Layout>
     );

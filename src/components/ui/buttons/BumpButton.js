@@ -20,9 +20,9 @@ const BumpButton = (props) => {
         };
     }, [buttonClass])
 
-    const onClickHandler = () => {
+    const onClickHandler = (event) => {
         setBtnIsHighlighted(true);
-        props.onClick();
+        props.onClick(event);
     }
 
     return (

@@ -1,0 +1,13 @@
+.card-style {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 0.5rem;
+}
+
+.info-card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 100%;
+}

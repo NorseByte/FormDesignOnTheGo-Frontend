@@ -1,0 +1,35 @@
+/* Left Container - Contact Styles */
+
+.contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.contact-wrapper {
+    background: white;
+    width: 100% !important;
+    box-sizing: border-box;
+    display: block;
+    padding: 2rem !important;
+}
+
+.h3 {
+    line-height: 1.5;
+    font-weight: 400;
+    font-size: 1.75rem;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+}
+
+/* Form Styles */
+
+.form {
+    text-align: left;
+}
+
+.error {
+    color: red;
+    white-space: pre-wrap;
+}

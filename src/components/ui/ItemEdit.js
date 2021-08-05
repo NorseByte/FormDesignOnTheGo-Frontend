@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import {formitemsAction} from "../../store/formitems-slice";
 import {useState} from "react";
 import BumpButton from "./buttons/BumpButton";
+import {Fragment} from "react";
 
 /* Values Recived: item={item} inputHandler={inputHandler} */
 const ItemEdit = (props) => {
@@ -29,6 +30,7 @@ const ItemEdit = (props) => {
         if(updateObject.name === "title") {userInput.title = updateObject.value}
         if(updateObject.name === "description") {userInput.description = updateObject.value}
         if(updateObject.name === "needed") {userInput.needed = updateObject.value}
+        if(updateObject.name === "error") {userInput.error = updateObject.value}
     }
 
     /* On Click Handler for Submit */
@@ -37,9 +39,15 @@ const ItemEdit = (props) => {
         let ERROR_FIELD = false;
 
         /* Check for Error */
-        for(const x in userInput) {
-            if(userInput[x] === "") {
-                ERROR_FIELD = true;
+        if(props.item.type === "button") {
+            if(userInput.title === "") { ERROR_FIELD = true }
+        }
+
+        else {
+            for (const x in userInput) {
+                if (userInput[x] === "") {
+                    ERROR_FIELD = true;
+                }
             }
         }
 
@@ -56,51 +64,50 @@ const ItemEdit = (props) => {
             id: props.item.id,
             title: userInput.title,
             description: userInput.description,
+            error: userInput.error,
             needed: userInput.needed
         }));
     }
 
     /* Handler for removing an item */
-    const removeHandler = (event) => {
+    const removeHandler = () => {
         dispatcher(formitemsAction.removeItem(props.item.id))
     }
 
-    const dummy = () => {
-        return "";
+    /* Handler for rank up*/
+    const moveUpRank = () => {
+        dispatcher(formitemsAction.moveUpRank(props.item.id))
     }
 
-    console.log(props.item)
-    return (
-        <Card className={classes["card-style"]}>
-            <div className={classes["title-container"]}>
-                <h2>Edit Your {props.item.type}</h2>
-                <p>Change the values to something you would like to present for the user. </p>
-            </div>
+    /* Handler for rank up*/
+    const moveDownRank = () => {
+        dispatcher(formitemsAction.moveDownRank(props.item.id))
+    }
 
-            <TextInput
-                id={`${props.item.id}`}
-                name={`title`}
-                type="text"
-                error="You need to enter a title, only letters and numbers."
-                hint={`Enter Title for your ${props.item.type}`}
-                handler={inputHandler}
-                validation="empty"
-                override={false}
-                options={props.item.options}
-                value={props.item.title}
-                triggerError={triggerError} />
-
+    const contentNotButton = (
+        <Fragment>
             <TextInput
                 id={`${props.item.id}`}
                 type="text"
                 name={`description`}
                 error="You need to enter a description, only letters and numbers."
-                hint={`Enter a description for your ${props.item.type}`}
+                hint={props.item.description !== "" ? props.item.description : `Enter a description for your ${props.item.type}`}
                 handler={inputHandler}
                 validation="empty"
                 override={false}
                 options={props.item.options}
-                value={props.item.description}
+                triggerError={triggerError} />
+
+            <TextInput
+                id={`${props.item.id}`}
+                type="text"
+                name={`error`}
+                error="You need to enter a description, only letters and numbers."
+                hint={props.item.error !== "" ? props.item.error : `Enter a error message for your ${props.item.type}`}
+                handler={inputHandler}
+                validation="empty"
+                override={false}
+                options={props.item.options}
                 triggerError={triggerError} />
 
             <TextInput
@@ -113,12 +120,35 @@ const ItemEdit = (props) => {
                 validation="empty"
                 override={true}
                 options={props.item.options} />
+        </Fragment>
+    );
+
+    return (
+        <Card className={classes["card-style"]}>
+            <div className={classes["title-container"]}>
+                <h2>#{props.item.id} - Edit Your {props.item.type}</h2>
+                <p>Change the values to something you would like to present for the user. </p>
+            </div>
+
+            <TextInput
+                id={`${props.item.id}`}
+                name={`title`}
+                type="text"
+                error="You need to enter a title, only letters and numbers."
+                hint={props.item.title !== "" ? props.item.title : `Enter Title for your ${props.item.type}`}
+                handler={inputHandler}
+                validation="empty"
+                override={false}
+                options={props.item.options}
+                triggerError={triggerError} />
+
+            {props.item.type !== "button" && contentNotButton}
 
             <div className={classes["button-container"]}>
                 <BumpButton onClick={saveHandler} color="green">{`Save new values`}</BumpButton>
-                <BumpButton onClick={dummy} >{`Move Up: ${props.item.rank}`}</BumpButton>
-                <BumpButton onClick={dummy} >{`Move Down: ${props.item.rank}`}</BumpButton>
-                <BumpButton onClick={removeHandler} color="red">{`Remove ${props.item.type} id: ${props.item.id}`}</BumpButton>
+                <BumpButton onClick={moveUpRank} >{`Move Up`}</BumpButton>
+                <BumpButton onClick={moveDownRank} >{`Move Down`}</BumpButton>
+                <BumpButton onClick={removeHandler} color="red">{`Remove ${props.item.type}`}</BumpButton>
             </div>
         </Card>
     );

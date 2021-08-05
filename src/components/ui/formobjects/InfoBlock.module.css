@@ -1,0 +1,23 @@
+/* Right Container - Info Styles*/
+
+.info-wrapper {
+    width: 100% !important;
+    padding: 2rem !important;
+}
+
+.h3 {
+    line-height: 1.5;
+    font-weight: 400;
+    font-size: 1.75rem;
+    margin-top: -1rem;
+}
+
+.white {
+    color: white;
+}
+
+.h4__info {
+    line-height: 1.5;
+    font-weight: 400;
+    color: white;
+}

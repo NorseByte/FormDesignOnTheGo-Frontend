@@ -9,11 +9,9 @@ const HomePage = () => {
         <Fragment>
             <Card className={classes["card-style"]}>
                 <div className={classes["info-card"]}>
-                    <h2>Hvordan starte?</h2>
-                    <p>For enkelt og komme igang, velg et element du ønsker og legge til. Når dette er gjort kan du
-                    justere hva slags validering som skal bli gjort. Hva navnet er, beskrivelse og ligenende.<br />
-                    <br />Deretter kan du fylle ut ekstra informasjon som kan bli vist på formen din. Du kan
-                        dertter lagre formen eller sende den til en venn. Eller teste den ut på preview siden. </p>
+                    <h2>How to get started?</h2>
+                    <p>To easily get started, select an item you require and include it by hitting the button. Once this is achieved, you can adjust the type of validation to be done. What the name is, description and the like. <br />
+                        <br /> At that time you could fill in further information that can be displayed on your form. You can then save the form or forward it to a friend. Or test it out on the preview page. </p>
                 </div>
             </Card>
 
