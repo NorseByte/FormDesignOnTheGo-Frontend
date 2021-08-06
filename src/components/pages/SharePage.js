@@ -10,7 +10,7 @@ const SharePage = () => {
     const formItems = useSelector(state => state.formitems.formItemsAdded);
 
     if(formItems.length === 0) {
-        return <EmptyPage path="/create" button="Create a form now!" title="Wow! What happend here?" content="You need to add some form objects before you can view or share your own form!" />
+        return <EmptyPage path="/create" button="Create a form now!" title="Can't share without creating!" content="You need to add some form objects before you can view or share your own form!" />
     }
 
 

@@ -12,6 +12,7 @@ const ShareForm = () => {
 
     /* Load Form Items */
     const formItems = useSelector(state => state.formitems.formItemsAdded);
+    const formInfo = useSelector(state => state.formitems.formText);
     const api = useSelector(state => state.context.apiURL);
 
     const changeHandler = () => {
@@ -20,7 +21,8 @@ const ShareForm = () => {
 
     const createURL = async () => {
         /* Creating a JSON OBJECT OF THE Items so far */
-        const JSONObject = JSON.stringify({...formItems});
+        const formObject =  { formItems: formItems, formInfo: formInfo}
+        const JSONObject = JSON.stringify({...formObject});
         console.log(JSONObject);
 
         /* Sending it to firebase */

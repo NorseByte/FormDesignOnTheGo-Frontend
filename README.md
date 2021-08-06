@@ -1,3 +1,10 @@
+<!-- PROJECT LOGO -->
+![Imgur](https://i.imgur.com/gzJLhzc.png)
+![netlify](https://img.shields.io/netlify/ba5d080b-17b8-4f4f-acdf-f6a861d46756)
+
+# FDOTG - Form Design On The Go
+Easy to use form designer when you reasonably demand it. An ambitious project naturally created to carefully explore the basic of React. Key topics included useState, context, redux, firebase, useeffectexternal librayes and much more.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

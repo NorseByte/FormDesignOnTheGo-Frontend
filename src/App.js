@@ -45,7 +45,7 @@ function App() {
                     <FormPage />
                 </Route>
 
-                <Route path="/form/:formid">
+                <Route path="/forms/:formid">
                     <FormPageDetail />
                 </Route>
 

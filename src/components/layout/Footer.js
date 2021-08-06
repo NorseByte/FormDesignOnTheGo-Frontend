@@ -11,7 +11,7 @@ const Footer = () => {
     const bigScreen = (
       <div className={classes['footer-container']}>
           <div className={classes['footer-tekst']}>
-              <a className={classes['links-list-a']} href="https://github.com/suxsx">GET IT AT GITHUB</a> &ndash; Easy, Simple and Free
+              <a className={classes['links-list-a']} href="https://github.com/suxSx/ProFilesFormDesign">GET IT AT GITHUB</a> &ndash; Easy, Simple and Free
           </div>
       </div>
     );
