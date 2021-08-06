@@ -1,8 +1,8 @@
 import classes from "./AddFormItems.module.css";
 import {Card} from "@material-ui/core";
 import {useSelector, useDispatch} from "react-redux";
-import {formitemsAction} from "../../store/formitems-slice";
-import BumpButton from "./buttons/BumpButton";
+import {formitemsAction} from "../../../../store/formitems-slice";
+import BumpButton from "../../buttons/BumpButton";
 
 const AddFormItems = () => {
     /* Get Items to Add */
@@ -47,7 +47,9 @@ const AddFormItems = () => {
 
     /* Mapping Items */
     const mappedItems = addItems.map((items) => (
-        <BumpButton key={items.id} onClick={onClickAddHandler.bind(this, items)}>{items.hint}</BumpButton>
+        <div key={items.id} className={classes['button-container']}>
+            <BumpButton onClick={onClickAddHandler.bind(this, items)}>{items.hint}</BumpButton>
+        </div>
     ));
 
     const onClearAllClick = () => {
@@ -58,7 +60,9 @@ const AddFormItems = () => {
         <Card className={`${classes["card-style"]}`}>
             <div className={classes["nav-container"]}>
                 {mappedItems}
-                <BumpButton onClick={onClearAllClick} color="red">Clear All</BumpButton>
+                <div className={classes['button-container']}>
+                    <BumpButton onClick={onClearAllClick} color="red">Clear All</BumpButton>
+                </div>
             </div>
         </Card>
     );

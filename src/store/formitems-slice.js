@@ -1,151 +1,214 @@
 /* Custom Slice for handeling Context in Form Items */
 import {createSlice} from "@reduxjs/toolkit";
 
+/* Import Items from memory */
+const localItems = JSON.parse(localStorage.getItem("form"));
+
+/* Const Init Info */
+const initInfo = [{id: 1, type: "Address", text: "", icon: "pos", action: ""},
+    {id: 2, type: "Phone", text: "", "icon": "phone", "action": ""},
+    {id: 3, type: "Email", text: "", "icon": "email", "action": ""},
+    {id: 4, type: "Social", text: "", "icon": "corpo", "action": ""},]
+
 /* Custom slice for sving and managing form items
 * Items will have the following setUp.
 *
 * { id: 1, type: "text", title: "postnummer", description: "Hva er ditt postnummer?", needed: 1, options: "", rank: 1, validation: "number", error: "Error Message"} */
 const formitemsSlice = createSlice({
-   name: 'formitems',
+    name: 'formitems',
 
-   initialState: {
-      formItemsAdded: [],
-      formText: {
-         title: "Awsome Title for Form",
-         titleLeft: "About me:",
-         info:   [{id:1,type:"Address",text:"Washingtown DC 23, 3440 R\u00f8yken",icon:"pos",action:""},
-                  {id:2,type:"Phone",text:"999 99 999","icon":"phone","action":""},
-                  {id:3,type:"Email",text:"post@knoph.cc","icon":"email","action":""},
-                  {id:4,type:"Social:",text:"7678 898 893","icon":"corpo","action":""},],
-      }
-   },
+    initialState: {
+        formItemsAdded: localItems ? localItems.formItemsAdded : [],
+        formText: localItems ? localItems.formText : {
+            title: "",
+            titleLeft: "",
+            info: initInfo,
+        }
+    },
 
-   reducers: {
-      addItem(state, action) {
-         /* Get new Item */
-         const newItem = action.payload;
+    reducers: {
+        addItem(state, action) {
+            /* Get new Item */
+            const newItem = action.payload;
 
-         /* Check if Item Exist */
-         const existingItem = state.formItemsAdded.find(item => item.id === newItem.id);
+            /* Check if Item Exist */
+            const existingItem = state.formItemsAdded.find(item => item.id === newItem.id);
 
-         /* If existing Item is not found is it undefined/null.
-         * We use here filter in order to easy remove the item for then to add it. */
-         if(existingItem) {
-            /* State edit is only possible becuase of redux toolkit. */
-            state.formItemsAdded = state.formItemsAdded.filter((item) => item.id !== newItem.id)
-         }
+            /* If existing Item is not found is it undefined/null.
+            * We use here filter in order to easy remove the item for then to add it. */
+            if (existingItem) {
+                /* State edit is only possible becuase of redux toolkit. */
+                state.formItemsAdded = state.formItemsAdded.filter((item) => item.id !== newItem.id)
+            }
 
-         /* Adding Item to list */
-         state.formItemsAdded.push(newItem)
-      },
+            /* Adding Item to list */
+            state.formItemsAdded.push(newItem)
 
-      updateItem(state, action) {
-         /* Get data */
-         const {id, title, description, needed, error} = action.payload;
+            /* Pushing to local Storage */
+            localStorage.setItem("form", JSON.stringify({formItemsAdded: state.formItemsAdded, formText: state.formText}))
+        },
 
-         /* Find Item */
-         const existingItem = state.formItemsAdded.find(item => item.id === parseInt(id));
+        updateItem(state, action) {
+            /* Get data */
+            const {id, title, description, needed, error} = action.payload;
 
-         /* Update item */
-         existingItem.title = title;
-         existingItem.description = description;
-         existingItem.needed = needed;
-         existingItem.error = error;
-      },
+            /* Find Item */
+            const existingItem = state.formItemsAdded.find(item => item.id === parseInt(id));
 
-      updateTitle(state, action) {
-         /* Get data */
-         const {id, title} = action.payload;
+            /* Update item */
+            existingItem.title = title;
+            existingItem.description = description;
+            existingItem.needed = needed;
+            existingItem.error = error;
 
-         /* Find Item */
-         const existingItem = state.formItemsAdded.find(item => item.id === parseInt(id));
+            /* Pushing to local Storage */
+            localStorage.setItem("form", JSON.stringify({formItemsAdded: state.formItemsAdded, formText: state.formText}))
+        },
 
-         /* Update item */
-         existingItem.title = title;
-      },
+        updateTitle(state, action) {
+            /* Get data */
+            const {id, title} = action.payload;
 
-      updateDescription(state, action) {
-         /* Get data */
-         const {id, description} = action.payload;
+            /* Find Item */
+            const existingItem = state.formItemsAdded.find(item => item.id === parseInt(id));
 
-         /* Find Item */
-         const existingItem = state.formItemsAdded.find(item => item.id === parseInt(id));
+            /* Update item */
+            existingItem.title = title;
 
-         /* Update item */
-         existingItem.description = description;
-      },
+            /* Pushing to local Storage */
+            localStorage.setItem("form", JSON.stringify({formItemsAdded: state.formItemsAdded, formText: state.formText}))
+        },
 
-      updateNeeded(state, action) {
-         /* Get data */
-         const {id, needed} = action.payload;
+        updateDescription(state, action) {
+            /* Get data */
+            const {id, description} = action.payload;
 
-         /* Find Item */
-         const existingItem = state.formItemsAdded.find(item => item.id === parseInt(id));
+            /* Find Item */
+            const existingItem = state.formItemsAdded.find(item => item.id === parseInt(id));
 
-         /* Update item */
-         existingItem.needed = needed;
-      },
+            /* Update item */
+            existingItem.description = description;
 
-      removeItem(state, action) {
-         /* Getting ID */
-         const id = action.payload;
-         let counter = 0;
+            /* Pushing to local Storage */
+            localStorage.setItem("form", JSON.stringify({formItemsAdded: state.formItemsAdded, formText: state.formText}))
+        },
 
-         /* Updating state with filter */
-         state.formItemsAdded = state.formItemsAdded.filter((item) => item.id !== id);
+        updateNeeded(state, action) {
+            /* Get data */
+            const {id, needed} = action.payload;
 
-         /* Sorting state */
-         state.formItemsAdded = state.formItemsAdded.sort((a, b) => a.rank - b.rank);
+            /* Find Item */
+            const existingItem = state.formItemsAdded.find(item => item.id === parseInt(id));
 
-         /* Renaming */
-         for(const x in state.formItemsAdded) {
-            state.formItemsAdded[x].rank = counter;
-            counter++;
-         }
-      },
+            /* Update item */
+            existingItem.needed = needed;
 
-      clearForm(state) {
-         state.formItemsAdded = [];
-         console.log("Form Clear");
-      },
+            /* Pushing to local Storage */
+            localStorage.setItem("form", JSON.stringify({formItemsAdded: state.formItemsAdded, formText: state.formText}))
+        },
 
-      moveUpRank(state, action) {
-         /* Rank ID to Move */
-         const id = action.payload;
+        removeItem(state, action) {
+            /* Getting ID */
+            const id = action.payload;
+            let counter = 0;
 
-         /* Finding the ID */
-         const itemToMove = state.formItemsAdded.find(item => item.id === id);
-         const swapRank = (itemToMove.rank - 1);
+            /* Updating state with filter */
+            state.formItemsAdded = state.formItemsAdded.filter((item) => item.id !== id);
 
-         /* Checking if Rank is not 1 cant move any more up*/
-         if(itemToMove.rank !== 0) {
-            const swapID = state.formItemsAdded.find(item => item.rank === swapRank)
+            /* Sorting state */
+            state.formItemsAdded = state.formItemsAdded.sort((a, b) => a.rank - b.rank);
 
-            swapID.rank += 1;
-            itemToMove.rank -= 1;
-         }
-      },
+            /* Renaming */
+            for (const x in state.formItemsAdded) {
+                state.formItemsAdded[x].rank = counter;
+                counter++;
+            }
 
-      moveDownRank(state, action) {
-         /* Rank ID to Move */
-         const id = action.payload;
+            /* Pushing to local Storage */
+            localStorage.setItem("form", JSON.stringify({formItemsAdded: state.formItemsAdded, formText: state.formText}))
+        },
 
-         /* Finding the ID */
-         const itemToMove = state.formItemsAdded.find(item => item.id === id);
-         const swapRank = (itemToMove.rank + 1);
-         const maxRank = (state.formItemsAdded.length - 1);
+        clearForm(state) {
+            state.formItemsAdded = [];
+            state.formText.info = initInfo;
+            state.formText.title = "";
+            state.formText.titleLeft = "";
+            console.log("Form Clear");
+
+            /* Removing Storage */
+            localStorage.removeItem("form");
+        },
+
+        moveUpRank(state, action) {
+            /* Rank ID to Move */
+            const id = action.payload;
+
+            /* Finding the ID */
+            const itemToMove = state.formItemsAdded.find(item => item.id === id);
+            const swapRank = (itemToMove.rank - 1);
+
+            /* Checking if Rank is not 1 cant move any more up*/
+            if (itemToMove.rank !== 0) {
+                const swapID = state.formItemsAdded.find(item => item.rank === swapRank)
+
+                swapID.rank += 1;
+                itemToMove.rank -= 1;
+            }
+
+            /* Pushing to local Storage */
+            localStorage.setItem("form", JSON.stringify({formItemsAdded: state.formItemsAdded, formText: state.formText}))
+        },
+
+        moveDownRank(state, action) {
+            /* Rank ID to Move */
+            const id = action.payload;
+
+            /* Finding the ID */
+            const itemToMove = state.formItemsAdded.find(item => item.id === id);
+            const swapRank = (itemToMove.rank + 1);
+            const maxRank = (state.formItemsAdded.length - 1);
 
 
-         /* Checking if Rank is not 1 cant move any more up*/
-         if(itemToMove.rank !== maxRank) {
-            const swapID = state.formItemsAdded.find(item => item.rank === swapRank)
+            /* Checking if Rank is not 1 cant move any more up*/
+            if (itemToMove.rank !== maxRank) {
+                const swapID = state.formItemsAdded.find(item => item.rank === swapRank)
 
-            swapID.rank -= 1;
-            itemToMove.rank += 1;
+                swapID.rank -= 1;
+                itemToMove.rank += 1;
+            }
 
-         }
-      },
-   }
+            /* Pushing to local Storage */
+            localStorage.setItem("form", JSON.stringify({formItemsAdded: state.formItemsAdded, formText: state.formText}))
+        },
+
+        updateFormInfo(state, action) {
+            /* Get value and id */
+            const {id, value} = action.payload;
+
+            /* Finding update item */
+            const updateItem = state.formText.info.find((item) => item.id === id);
+
+            /* Updating item */
+            updateItem.text = value;
+
+            /* Pushing to local Storage */
+            localStorage.setItem("form", JSON.stringify({formItemsAdded: state.formItemsAdded, formText: state.formText}))
+        },
+
+        updateFormTitle(state, action) {
+            state.formText.title = action.payload;
+
+            /* Pushing to local Storage */
+            localStorage.setItem("form", JSON.stringify({formItemsAdded: state.formItemsAdded, formText: state.formText}))
+        },
+
+        updateFormSubTitle(state, action) {
+            state.formText.titleLeft = action.payload;
+
+            /* Pushing to local Storage */
+            localStorage.setItem("form", JSON.stringify({formItemsAdded: state.formItemsAdded, formText: state.formText}))
+        }
+    }
 });
 
 /* Exporting Actions */

@@ -1,5 +1,6 @@
 import classes from "./BumpButton.module.css";
 import {useState, useEffect} from "react";
+import {Button} from "@dossier/mithra-ui";
 
 const BumpButton = (props) => {
     /* State for controlling if button is highligthet or note for animation with use effect */
@@ -26,8 +27,8 @@ const BumpButton = (props) => {
     }
 
     return (
-        <button className={buttonClass} onClick={onClickHandler}>{props.children}</button>
+        <Button className={buttonClass} text={props.children} variant={props.variant ? props.variant : "primary"} intent={props.color ? props.color === "green" ? "positive" : "negative" : ""} onClick={onClickHandler} />
     );
-}
+};
 
 export default BumpButton;

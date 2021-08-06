@@ -1,8 +1,9 @@
 import classes from "./HomePage.module.css";
 import {Card} from "@material-ui/core";
 import {Fragment} from "react";
-import AddFormItems from "../ui/AddFormItems";
-import EditFormItems from "../ui/EditFormItems";
+import AddFormItems from "../ui/createobjects/formitems/AddFormItems";
+import EditFormItems from "../ui/createobjects/formitems/EditFormItems";
+import InfoItemEdit from "../ui/createobjects/forminfo/InfoItemEdit";
 
 const HomePage = () => {
     return (
@@ -15,6 +16,7 @@ const HomePage = () => {
                 </div>
             </Card>
 
+            <InfoItemEdit />
             <AddFormItems />
             <EditFormItems />
         </Fragment>

@@ -1,0 +1,23 @@
+.card-style {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 0.5rem;
+}
+.nav-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+h3 {
+    margin-bottom: 0.5rem;
+    margin-left: 1rem;
+}
+
+@media (max-width: 750px) {
+    .nav-container {
+        flex-direction: column;
+        display: flex;
+    }
+}

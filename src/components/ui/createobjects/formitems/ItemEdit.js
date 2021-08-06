@@ -1,10 +1,10 @@
 import classes from "./ItemEdit.module.css";
-import TextInput from "./formobjects/TextInput";
+import TextInput from "../../formobjects/TextInput";
 import {Card} from "@material-ui/core";
 import {useDispatch} from "react-redux";
-import {formitemsAction} from "../../store/formitems-slice";
+import {formitemsAction} from "../../../../store/formitems-slice";
 import {useState} from "react";
-import BumpButton from "./buttons/BumpButton";
+import BumpButton from "../../buttons/BumpButton";
 import {Fragment} from "react";
 
 /* Values Recived: item={item} inputHandler={inputHandler} */
@@ -27,10 +27,18 @@ const ItemEdit = (props) => {
     };
 
     const inputHandler = (updateObject) => {
-        if(updateObject.name === "title") {userInput.title = updateObject.value}
-        if(updateObject.name === "description") {userInput.description = updateObject.value}
-        if(updateObject.name === "needed") {userInput.needed = updateObject.value}
-        if(updateObject.name === "error") {userInput.error = updateObject.value}
+        if (updateObject.name === "title") {
+            userInput.title = updateObject.value
+        }
+        if (updateObject.name === "description") {
+            userInput.description = updateObject.value
+        }
+        if (updateObject.name === "needed") {
+            userInput.needed = updateObject.value
+        }
+        if (updateObject.name === "error") {
+            userInput.error = updateObject.value
+        }
     }
 
     /* On Click Handler for Submit */
@@ -39,11 +47,11 @@ const ItemEdit = (props) => {
         let ERROR_FIELD = false;
 
         /* Check for Error */
-        if(props.item.type === "button") {
-            if(userInput.title === "") { ERROR_FIELD = true }
-        }
-
-        else {
+        if (props.item.type === "button") {
+            if (userInput.title === "") {
+                ERROR_FIELD = true
+            }
+        } else {
             for (const x in userInput) {
                 if (userInput[x] === "") {
                     ERROR_FIELD = true;
@@ -54,7 +62,7 @@ const ItemEdit = (props) => {
         /* No Error so we reset if there where any */
         setTriggerError(false);
 
-        if(ERROR_FIELD) {
+        if (ERROR_FIELD) {
             setTriggerError(true);
             return;
         }
@@ -96,7 +104,7 @@ const ItemEdit = (props) => {
                 validation="empty"
                 override={false}
                 options={props.item.options}
-                triggerError={triggerError} />
+                triggerError={triggerError}/>
 
             <TextInput
                 id={`${props.item.id}`}
@@ -108,7 +116,7 @@ const ItemEdit = (props) => {
                 validation="empty"
                 override={false}
                 options={props.item.options}
-                triggerError={triggerError} />
+                triggerError={triggerError}/>
 
             <TextInput
                 id={`${props.item.id}`}
@@ -119,7 +127,8 @@ const ItemEdit = (props) => {
                 handler={inputHandler}
                 validation="empty"
                 override={true}
-                options={props.item.options} />
+                checked={props.item.needed}
+                options={props.item.options}/>
         </Fragment>
     );
 
@@ -140,15 +149,26 @@ const ItemEdit = (props) => {
                 validation="empty"
                 override={false}
                 options={props.item.options}
-                triggerError={triggerError} />
+                triggerError={triggerError}/>
 
             {props.item.type !== "button" && contentNotButton}
 
             <div className={classes["button-container"]}>
-                <BumpButton onClick={saveHandler} color="green">{`Save new values`}</BumpButton>
-                <BumpButton onClick={moveUpRank} >{`Move Up`}</BumpButton>
-                <BumpButton onClick={moveDownRank} >{`Move Down`}</BumpButton>
-                <BumpButton onClick={removeHandler} color="red">{`Remove ${props.item.type}`}</BumpButton>
+                <div className={classes['single-button-container']}>
+                    <BumpButton onClick={saveHandler} color="green">{`Save new values`}</BumpButton>
+                </div>
+
+                <div className={classes['single-button-container']}>
+                    <BumpButton onClick={moveUpRank}>{`Move Up`}</BumpButton>
+                </div>
+
+                <div className={classes['single-button-container']}>
+                    <BumpButton onClick={moveDownRank}>{`Move Down`}</BumpButton>
+                </div>
+
+                <div className={classes['single-button-container']}>
+                    <BumpButton onClick={removeHandler} color="red">{`Remove ${props.item.type}`}</BumpButton>
+                </div>
             </div>
         </Card>
     );

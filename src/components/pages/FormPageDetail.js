@@ -3,12 +3,10 @@ import {useSelector} from "react-redux";
 import {useState, useCallback, useEffect, Fragment} from "react";
 import EmptyPage from "./EmptyPage";
 import GenerateForm from "../ui/GenerateForm";
+import LoadingSpinner from "../ui/spinner/LoadingSpinner";
 
 
 const FormPageDetail = () => {
-    //Test urL: https://form-design-dossier-default-rtdb.firebaseio.com/forms/-MgPAPH9hmqkEWUKfJCa.json
-
-
     /* Error Handler state */
     const [fetchError, setFetchError] = useState(null);
     const [formItems, setFormItems] = useState([]);
@@ -72,6 +70,7 @@ const FormPageDetail = () => {
 
     return(
         <Fragment>
+            {isLoading && <LoadingSpinner />}
             {fetchError && <EmptyPage path="/create" button="Start fresh and create a new form!" title="Something Went Wrong!"
                         content={fetchError}/>}
             {!fetchError && !isLoading && <GenerateForm formInfo={formInfo} formItems={sortedItems} />}

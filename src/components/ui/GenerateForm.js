@@ -75,7 +75,7 @@ const GenerateForm = (props) => {
                     hint={item.description}
                     handler={inputHandler}
                     validation={item.validation}
-                    override={false}
+                    override={item.needed !== "1"}
                     options={item.options} />
     });
 

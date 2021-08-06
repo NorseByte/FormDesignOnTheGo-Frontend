@@ -1,6 +1,7 @@
 import classes from './TextInput.module.css';
 import WrapperInput from "./WrapperInput";
 import {useState, Fragment} from "react";
+import {Checkbox} from "@dossier/mithra-ui";
 
 const checkValue = (validation, isEmptyOK, innput) => {
     if(innput !== "") {
@@ -116,9 +117,9 @@ const TextInput = (props) => {
 
     if (props.type === "checkbox") {
         provider = (
+            /* TODO: ADD CHECKED IF IT IS NEEDED */
             <Fragment>
-                <input key={localID} type={props.type} id={localID} placeholder={props.name} value={"props.name"} onChange={inputCheckboxChangeHandler} />
-                <label htmlFor={props.name}>{props.hint}</label>
+                <Checkbox label={props.hint} onChange={inputCheckboxChangeHandler} />
             </Fragment>
         )
     }

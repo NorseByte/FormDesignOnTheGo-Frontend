@@ -6,15 +6,25 @@
 }
 .nav-container {
     display: flex;
+    justify-content: space-between;
     flex-direction: row;
     position: relative;
     margin: 0.5rem;
-    justify-content: space-around;
+}
+
+.button-container {
+    width: 100%;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
 }
 
 @media (max-width: 750px) {
     .nav-container {
         flex-direction: column;
         display: flex;
+    }
+
+    .button-container {
+        margin: 0;
     }
 }
