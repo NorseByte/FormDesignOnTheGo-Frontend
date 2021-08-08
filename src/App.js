@@ -8,6 +8,7 @@ import FormPage from "./components/pages/FormPage";
 import SharePage from "./components/pages/SharePage";
 import NotFoundPage from "./components/pages/NotFoundPage";
 import FormPageDetail from "./components/pages/FormPageDetail";
+import ArchivePage from "./components/pages/ArchivePage"
 
 /* Import Actions and Dispatch */
 import {contextAction} from "./store/context-slice";
@@ -51,6 +52,10 @@ function App() {
 
                 <Route path="/share">
                     <SharePage />
+                </Route>
+
+                <Route path="/archive">
+                    <ArchivePage />
                 </Route>
 
                 <Redirect from="/" to="/create" exact/>

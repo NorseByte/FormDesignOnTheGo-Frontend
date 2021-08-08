@@ -20,8 +20,11 @@ const ShareForm = () => {
     }
 
     const createURL = async () => {
+        /* Current Time */
+        const timeNow = new Date().toLocaleString();
+
         /* Creating a JSON OBJECT OF THE Items so far */
-        const formObject =  { formItems: formItems, formInfo: formInfo}
+        const formObject =  { formItems: formItems, formInfo: formInfo, formTime: timeNow}
         const JSONObject = JSON.stringify({...formObject});
         console.log(JSONObject);
 
@@ -54,7 +57,7 @@ const ShareForm = () => {
                     name="share-url"
                     type="text"
                     value={urlAddr}
-                    hint="PUSH GENERATE TO MAKE SOMETHING AMAZING"
+                    hint="PUSH GENERATE TO MAKE A CUSTOM URL FOR YOUR FORM!"
                     error=""
                     options=""
                     validation="empty"
@@ -64,7 +67,7 @@ const ShareForm = () => {
 
 
             </div>
-            <BumpButton onClick={createURL}>GENERATE MY AWESOME URL</BumpButton>
+            <BumpButton onClick={createURL}>GENERATE MY CUSTOM URL</BumpButton>
         </Card>
     );
 }

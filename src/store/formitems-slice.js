@@ -5,10 +5,10 @@ import {createSlice} from "@reduxjs/toolkit";
 const localItems = JSON.parse(localStorage.getItem("form"));
 
 /* Const Init Info */
-const initInfo = [{id: 1, type: "Address", text: "", icon: "pos", action: ""},
-    {id: 2, type: "Phone", text: "", "icon": "phone", "action": ""},
-    {id: 3, type: "Email", text: "", "icon": "email", "action": ""},
-    {id: 4, type: "Social", text: "", "icon": "corpo", "action": ""},]
+const initInfo = [{id: 1, type: "Address", text: "", icon: "pos", action: "", error: "Enter a valid Adress only letter and number"},
+    {id: 2, type: "Phone", text: "", icon: "phone", action: "", error: "Enter a valid Phone only letter and number"},
+    {id: 3, type: "Email", text: "", icon: "email", action: "", error: "Enter a valid Email remember the @"},
+    {id: 4, type: "Social", text: "",icon: "corpo", action: "", error: "Enter a valid social address only letter and number"},]
 
 /* Custom slice for sving and managing form items
 * Items will have the following setUp.

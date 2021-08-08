@@ -52,6 +52,7 @@ const FormPageDetail = () => {
 
         } catch (error) {
             setFetchError(error.toString());
+            setIsLoading(false);
             return [];
         }
 

@@ -1,0 +1,29 @@
+.card-style {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 0.5rem;
+}
+
+.nav-container {
+    display: flex;
+    justify-content:flex-end;
+    flex-direction: column;
+    margin: 0.5rem;
+}
+
+.button-container {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+@media (max-width: 750px) {
+    .nav-container {
+        flex-direction: column;
+        display: flex;
+    }
+
+    .button-container {
+        margin: 0;
+    }
+}

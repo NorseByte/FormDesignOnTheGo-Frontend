@@ -52,10 +52,10 @@ const EditInfoItemField = (props) => {
                         id={item.id}
                         type="text"
                         name={item.name}
-                        error="Only letters and numbers."
+                        error={item.error ? item.error : "Only letters and numbers."}
                         hint={item.hint !== "" ? item.hint : `Enter a description for your ${item.name}`}
                         handler={inputChangeHandler}
-                        validation="empty"
+                        validation={item.type === "Email" ? "epost" : "empty"}
                         override={false}
                         options={""}
                         triggerError={triggerError}/>

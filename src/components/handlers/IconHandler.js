@@ -9,6 +9,7 @@ import LocationIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/Phone';
 import EmailIcon from '@material-ui/icons/Email';
 import CorpoIcon from '@material-ui/icons/List';
+import ArchiveIcon from '@material-ui/icons/Archive';
 
 const IconHandler = (props) => {
     if (props.icon === 'save') {
@@ -40,6 +41,9 @@ const IconHandler = (props) => {
     }
     if (props.icon === 'corpo') {
         return <CorpoIcon />
+    }
+    if(props.icon === 'files') {
+        return <ArchiveIcon />
     }
 
     return <ErrorIcon/>
