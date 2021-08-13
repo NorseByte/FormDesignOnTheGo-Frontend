@@ -15,10 +15,12 @@ const ShareForm = () => {
     const formInfo = useSelector(state => state.formitems.formText);
     const api = useSelector(state => state.context.apiURL);
 
+    /* Function to handle changes */
     const changeHandler = () => {
         console.log("Something amazing happened");
     }
 
+    /* Pushing data to Firebase */
     const createURL = async () => {
         /* Current Time */
         const timeNow = new Date().toLocaleString();
@@ -30,7 +32,7 @@ const ShareForm = () => {
 
         /* Sending it to firebase */
         try {
-            const response = await fetch(api + "/forms.json", {
+            const response = await fetch(api + "/forms", {
                method: 'POST',
                headers: {
                    'Content-Type': 'application/json'
@@ -67,6 +69,7 @@ const ShareForm = () => {
 
 
             </div>
+
             <BumpButton onClick={createURL}>GENERATE MY CUSTOM URL</BumpButton>
         </Card>
     );

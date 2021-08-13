@@ -1,4 +1,4 @@
-import {Component, Fragment} from "react";
+import {Component} from "react";
 import ArchiveListItem from "./ArchiveListItem";
 import LoadingSpinner from "./spinner/LoadingSpinner";
 import EmptyPage from "../pages/EmptyPage";
@@ -53,12 +53,12 @@ class ArchiveList extends Component {
 
     render() {
         return (
-            <Fragment>
+            <>
                     {this.state.isLoading && <LoadingSpinner />}
                     {this.state.fetchError && <EmptyPage path="/create" button="Start fresh and create a new form!" title="Something Went Wrong!"
                                               content={this.state.fetchError}/>}
                     {!this.state.fetchError && !this.state.isLoading && <ArchiveListItem item={this.state.data} />}
-            </Fragment>
+            </>
         );
     }
 }

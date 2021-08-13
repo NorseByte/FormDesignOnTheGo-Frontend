@@ -5,7 +5,7 @@ import ArchiveList from "../ui/ArchiveList";
 import {useSelector} from "react-redux";
 
 const ArchivePage = () => {
-    const api = useSelector(state => state.context.apiURL) + "/forms.json";
+    const api = useSelector(state => state.context.apiURL) + "/forms";
 
     return(
         <Fragment>

@@ -12,7 +12,7 @@ const contextSlice = createSlice({
     initialState: {
         previewForm: false,
         isBig: window.innerWidth >= 1200,
-        apiURL: "https://form-design-dossier-default-rtdb.firebaseio.com",
+        apiURL: "http://localhost:8080",
         menu: [ {id: 1, name: "Create Form", action: "/create", icon: "create" },
                 {id: 2, name: "Preview", action: "/form/", icon: "preview" },
                 {id: 3, name: "Share/Save", action: "/share", icon: "save" },
