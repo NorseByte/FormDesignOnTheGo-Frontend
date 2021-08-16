@@ -12,7 +12,7 @@ const contextSlice = createSlice({
     initialState: {
         previewForm: false,
         isBig: window.innerWidth >= 1200,
-        apiURL: "http://localhost:8080",
+        apiURL: "http://127.0.0.1:8080",
         menu: [ {id: 1, name: "Create Form", action: "/create", icon: "create" },
                 {id: 2, name: "Preview", action: "/form/", icon: "preview" },
                 {id: 3, name: "Share/Save", action: "/share", icon: "save" },
