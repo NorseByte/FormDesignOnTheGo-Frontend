@@ -43,9 +43,15 @@ const ShareForm = () => {
             /* Get response Data */
             const data = await response.json();
 
-            /* Get current id and address to post */
-            console.log(data.name);
-            setUrlAddr(window.location.hostname + "/forms/" + data.name)
+            /* Check if post OK */
+            if(data.status === "post-request") {
+                /* All ok, message include form id*/
+                setUrlAddr(window.location.hostname + "/forms/" + data.message)
+            } else {
+                /* Something went wrong*/
+                setUrlAddr(data.message)
+                console.log(data.status + " " + data.message)
+            }
         } catch (error) {
             console.log(error.message);
         }

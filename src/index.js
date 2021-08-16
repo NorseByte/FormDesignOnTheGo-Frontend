@@ -12,4 +12,7 @@ import {Provider} from "react-redux";
 /* Import Store */
 import store from "./store";
 
+/* Import Mithera CSS*/
+import "@dossier/mithra-ui/dist/ds.css"
+
 ReactDOM.render(<Provider store={store}><BrowserRouter><App/></BrowserRouter></Provider>, document.getElementById('root'));

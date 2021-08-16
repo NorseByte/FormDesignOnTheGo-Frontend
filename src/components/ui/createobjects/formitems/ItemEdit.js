@@ -23,7 +23,8 @@ const ItemEdit = (props) => {
     let userInput = {
         title: "",
         description: "",
-        needed: "",
+        needed: 0,
+        error: "",
     };
 
     const inputHandler = (updateObject) => {

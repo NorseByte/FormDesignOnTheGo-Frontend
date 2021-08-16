@@ -14,13 +14,12 @@ const ArchiveListItem = (props) => {
     console.log(props.item)
     let returnValue = [];
     for (const x in props.item) {
-        returnValue.push({id: x, time: props.item[x].formTime});
+        returnValue.push({id: props.item[x]['form_id'], time: props.item[x]['form_time']});
     }
 
-    console.log(returnValue);
     const generateList = returnValue.map((item) => (
         <div key={item.id} className={classes['button-container']}>
-            <BumpButton onClick={onClickHandler.bind(this, item.id)}>{`ID: ${item.id} Created: ${item.time}`}</BumpButton>
+            <BumpButton onClick={onClickHandler.bind(this, item.id)}>{`ID: ${item.id} - Created: ${item.time}`}</BumpButton>
         </div>
     ));
 

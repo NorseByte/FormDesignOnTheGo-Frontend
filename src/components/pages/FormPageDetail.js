@@ -24,7 +24,7 @@ const FormPageDetail = () => {
     const {formid} = params;
 
     /* Post URL */
-    const URL = api + formid + ".json";
+    const URL = api + formid;
 
     /* Using Callback to make sure this dosent change, inorder to use effect on page load so we
     * dont get a inifityloop*/
@@ -45,10 +45,13 @@ const FormPageDetail = () => {
                 throw new Error("Well, this can happen. It seems that the form does not exist. Can you try and change the url or create a new one?");
             }
 
+            if(data.status === "ERROR") {
+                throw new Error("Well, this can happen. The form id did not exist. Try creating a new form.");
+            }
+
             /* Data success set new data */
             setFormInfo(data.formInfo);
             setFormItems(data.formItems);
-
 
         } catch (error) {
             setFetchError(error.toString());

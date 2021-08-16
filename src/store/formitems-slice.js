@@ -21,7 +21,7 @@ const formitemsSlice = createSlice({
         formItemsAdded: localItems ? localItems.formItemsAdded : [],
         formText: localItems ? localItems.formText : {
             title: "",
-            titleLeft: "",
+            subtitle: "",
             info: initInfo,
         }
     },
@@ -132,7 +132,7 @@ const formitemsSlice = createSlice({
             state.formItemsAdded = [];
             state.formText.info = initInfo;
             state.formText.title = "";
-            state.formText.titleLeft = "";
+            state.formText.subtitle = "";
             console.log("Form Clear");
 
             /* Removing Storage */
@@ -203,7 +203,7 @@ const formitemsSlice = createSlice({
         },
 
         updateFormSubTitle(state, action) {
-            state.formText.titleLeft = action.payload;
+            state.formText.subtitle = action.payload;
 
             /* Pushing to local Storage */
             localStorage.setItem("form", JSON.stringify({formItemsAdded: state.formItemsAdded, formText: state.formText}))

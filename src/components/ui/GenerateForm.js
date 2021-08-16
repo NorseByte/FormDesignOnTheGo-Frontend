@@ -99,7 +99,7 @@ const GenerateForm = (props) => {
 
     /* Info items*/
     const rightContainer = (
-        <InfoBlock title={props.formInfo.titleLeft} info={""}>
+        <InfoBlock title={props.formInfo.subtitle} info={""}>
             {mappedInfo}
         </InfoBlock>
     );
